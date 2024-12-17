@@ -1,79 +1,95 @@
 import 'reflect-metadata'
 import 'dotenv/config'
 
-import express from 'express';
+import express from 'express'
 import * as fs from 'node:fs'
 import * as showdown from 'showdown'
 
-import * as config from './config';
-import { TemplateParameters, Viewport } from './types';
-import { renderTemplate } from './render';
+import * as config from './config'
+import { TemplateParameters, Viewport } from './types'
+import { createFromPreviewTemplate, renderTemplateAsHTML, renderTemplateToImage } from './render'
 
-// set up express web server
 const app = express()
-// set up static content
 app.use(express.static('public'))
-// Use express.json() middleware to parse JSON bodies
 app.use(express.json())
 
 const md = new showdown.Converter()
 
-// Main page
-app.get('/', async(_request, response) => {
+app.get('/', async (_request, response) => {
   const readme = fs.readFileSync('README.md', 'utf-8')
-
-  console.log(`Received request. Sending readme content.`)
-
-  // render HTML response
   try {
+    const content = fs.readFileSync('views/index.tmpl', 'utf-8').replace('@@MAIN@@', md.makeHtml(readme.toString()))
     response.set('Content-Type', 'text/html')
-
-    const content = fs.readFileSync('views/index.tmpl', 'utf-8')
-      .replace('@@MAIN@@', md.makeHtml(readme.toString()))
     response.send(content)
   } catch (error) {
     response.send()
   }
 })
 
-app.get('/generate', async (req, res) => {
-  const { templateName, parameters, width, height } = req.query;
+/**
+ * Renders token-rating from the corresponding template.
+ * Used as a demo (for the development/testing purposes).
+ * To see the closest result to the screenshot, please use /iframed-preview endpoint.
+ */
+app.get('/preview', async (request, response) => {
+  const { templateName, width, height } = request.query
+  const parameters = parseParameters(request, response)
+  const content = await renderTemplateAsHTML(String(templateName), parameters)
+  const html = createFromPreviewTemplate(content, width, height)
+  response.set('Content-Type', 'text/html')
+  response.send(html)
+})
 
-  // Parse the parameters from JSON string to object
-  let parsedParameters: TemplateParameters;
-  try {
-    parsedParameters = JSON.parse(parameters as string);
-  } catch (error) {
-    console.error('Error parsing parameters:', error);
-    return res.status(400).send('Invalid parameters format');
-  }
+/**
+ * Opens /preview content in iframe.
+ * Used as a demo (for the development/testing purposes).
+ */
+app.get('/iframed-preview', async (request, response) => {
+  const { width, height } = request.query
+  const params = new URLSearchParams(request.query as Record<string, any>)
+  const content = `<iframe src="http://localhost:${config.port}/preview?${params.toString()}" width="${width}" height="${height}"></iframe>`
+  const html = createFromPreviewTemplate(content, width, height)
+  response.set('Content-Type', 'text/html')
+  response.send(html)
+})
+
+app.get('/generate', async (request, response) => {
+  const { templateName, width, height } = request.query
 
   const viewport: Viewport = {
     width: parseInt(width as string),
     height: parseInt(height as string),
-  };
-
-  try {
-    const imageBuffer = await renderTemplate(templateName as string, parsedParameters, viewport);
-    res.setHeader('Content-Type', 'image/png');
-    res.send(imageBuffer);
-  } catch (error) {
-    console.error('Error generating image:', error);
-    res.status(500).send('Error generating image');
   }
-});
 
+  const parameters = parseParameters(request, response)
+  try {
+    const imageBuffer = await renderTemplateToImage(templateName as string, parameters, viewport)
+    response.setHeader('Content-Type', 'image/png')
+    response.send(imageBuffer)
+  } catch (error) {
+    console.error('Error generating image:', error)
+    response.status(500).send('Error generating image')
+  }
+})
 
-
-async function main(){
-  app.listen(config.port, () => {
-    console.log(`🚀 Server ready at: https://localhost:${config.port}`)
-  }) 
+function parseParameters(request: express.Request, response: express.Response) {
+  try {
+    return JSON.parse(request.query.parameters as string)
+  } catch (error) {
+    console.error('Unable to parse parameters:', error)
+    response.status(400).send('Invalid parameters format')
+  }
 }
 
-
-main()
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
+async function main() {
+  app.listen(config.port, () => {
+    console.log(`🚀 Server ready at: http://localhost:${config.port}`)
   })
+}
+
+main().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})
+
+
