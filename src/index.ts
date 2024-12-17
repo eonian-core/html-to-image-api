@@ -7,7 +7,7 @@ import * as showdown from 'showdown'
 
 import * as config from './config'
 import { TemplateParameters, Viewport } from './types'
-import { renderTemplateAsHTML, renderTemplateToImage } from './render'
+import { createFromPreviewTemplate, renderTemplateAsHTML, renderTemplateToImage } from './render'
 
 const app = express()
 app.use(express.static('public'))
@@ -92,10 +92,4 @@ main().catch((error) => {
   process.exit(1)
 })
 
-function createFromPreviewTemplate(content: string, width: unknown, height: unknown): string {
-  return fs
-    .readFileSync('views/template-preview.tmpl', 'utf-8')
-    .replace('@@CONTENT@@', content)
-    .replace('@@WIDTH@@', `${width}px`)
-    .replace('@@HEIGHT@@', `${height}px`)
-}
+
