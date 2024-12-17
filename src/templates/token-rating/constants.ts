@@ -10,8 +10,14 @@ export const dimColor = 'rgba(0, 0, 0, 0.5)'
 /**
  * <GradientWrapper />
  */
-export const gradientWrapperColors: [string, string][] = [['rgba(247,149,51,1)', 'rgba(8,237,96,1)']]
-export const gradientWrapperPadding = '10px'
+export const gradientWrapperColors: [string, string][] = [
+  ['#ef4e7b', '#fde68b'],
+  ['#f87272', '#bbf7d0'],
+  ['#5073b8', 'hsla(38, 72%, 69%, .671)'],
+  ['#f37055', '#a166ab'],
+  ['#d52a60', '#637cee'],
+]
+export const gradientWrapperPadding = '8px'
 
 /**
  * <Card />
@@ -46,6 +52,7 @@ export const categoryCaptionFontStyles = {
   },
   category: {
     /* "color" is the first one of current `gradientWrapperColors` */
+    fontWeight: 500,
   },
 } satisfies Record<string, CSSProperties>
 

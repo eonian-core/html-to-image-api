@@ -7,7 +7,7 @@ export function GradientWrapper({ type, children }: React.PropsWithChildren<{ ty
       style={{
         width: '100%',
         height: '100%',
-        background: `linear-gradient(220deg, ${start} 41%, ${end} 100%)`,
+        background: `linear-gradient(to bottom right, ${start}, ${end})`,
         padding: gradientWrapperPadding,
       }}
     >
