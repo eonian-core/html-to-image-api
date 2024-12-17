@@ -100,7 +100,7 @@ export const tokenList = {
     gap: 6,
   },
   itemPriceChangeBar: {
-    background: `linear-gradient(240deg, ${positiveChangeColor} 0%, rgba(255,255,255,1) 100%)`,
+    background: `linear-gradient(240deg, var(--color) 0%, rgba(255,255,255,1) 100%)`,
     borderRadius: 4,
     gap: 4,
     paddingRight: 4,
@@ -114,4 +114,4 @@ export const tokenList = {
     fontWeight: 500,
     color: 'rgba(0, 0, 0, 0.6)'
   }
-} satisfies Record<string, CSSProperties>
+} satisfies Record<string, CSSProperties & Partial<{ '--color': string }>>

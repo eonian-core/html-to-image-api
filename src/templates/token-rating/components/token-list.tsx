@@ -1,4 +1,5 @@
-import { tokenList, tokenListIconSize } from '../constants'
+import { CSSProperties } from 'react'
+import { negativeChangeColor, positiveChangeColor, tokenList, tokenListIconSize } from '../constants'
 import { Token } from '../types'
 import { formatUSD } from '../utils/format-usd'
 
@@ -32,13 +33,16 @@ function TokenInfo({ token, index, minPriceChange, maxPriceChange }: TokenInfoPr
     <div style={{ ...tokenList.item, display: 'flex', alignItems: 'center' }}>
       <div>#{index + 2}</div>
       <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexBasis: `${barFlexBasis}%`,
-          justifyContent: 'space-between',
-          ...tokenList.itemPriceChangeBar,
-        }}
+        style={
+          {
+            display: 'flex',
+            alignItems: 'center',
+            flexBasis: `${barFlexBasis}%`,
+            justifyContent: 'space-between',
+            ...tokenList.itemPriceChangeBar,
+            '--color': token.priceChange < 0 ? negativeChangeColor : positiveChangeColor,
+          } as CSSProperties
+        }
       >
         <img src={token.icon} width={tokenListIconSize} height={tokenListIconSize} alt={token.symbol} />
         <span>{token.priceChange}%</span>
