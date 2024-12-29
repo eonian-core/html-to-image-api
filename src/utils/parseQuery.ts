@@ -8,11 +8,7 @@ export interface ParsedQuery {
 }
 
 export function parseQuery(req: NextApiRequest | GetServerSidePropsContext): ParsedQuery {
-  const isApiRequest = (req: any): req is NextApiRequest => 'query' in req;
-
-  const query = isApiRequest(req) ? req.query : req.query;
-
-  const { templateName, width, height, parameters } = query;
+  const { templateName, width, height, parameters } = req.query;
 
   if (typeof templateName !== 'string') {
     throw new Error('Template name is required and must be a string');
