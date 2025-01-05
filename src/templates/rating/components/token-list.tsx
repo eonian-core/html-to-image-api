@@ -53,7 +53,12 @@ function TokenInfo({ token, index, minPriceChange, maxPriceChange }: TokenInfoPr
         <img src={token.icon} width={tokenListIconSize} height={tokenListIconSize} alt={token.symbol} />
         <span style={{ paddingLeft: 8 }}>{token.priceChange}%</span>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', ...tokenList.itemInfo }}>
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        marginLeft: 'auto',
+        ...tokenList.itemInfo,
+        }}>
         <div style={tokenList.itemInfoPrice}>{formatUSD(token.price)}</div>
         <div>{token.symbol}</div>
       </div>

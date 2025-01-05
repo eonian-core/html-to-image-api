@@ -3,9 +3,9 @@ import { CSSProperties } from 'react'
 /**
  * Common
  */
-export const positiveChangeColor = 'hsl(142, 71%, 45%)'
+export const positiveChangeColor = 'hsl(142, 71%, 55%)'
 export const negativeChangeColor = 'hsl(0, 84%, 60%)'
-export const dimColor = 'rgba(0, 0, 0, 0.5)'
+export const dimColor = 'hsl(240, 6%, 90%)'
 
 /**
  * <GradientWrapper />
@@ -23,7 +23,7 @@ export const gradientWrapperPadding = '16px'
  * <Card />
  */
 export const cardStyles: CSSProperties = {
-  background: 'linear-gradient(to bottom right, hsl(240, 6%, 90%) 15%, hsl(0, 0%, 100%) 40%, hsl(240, 6%, 90%) 55%)',
+  background: 'linear-gradient(to bottom right, hsl(240, 4%, 14%) 15%, hsl(240, 5%, 20%) 35%, hsl(240, 4%, 12%) 55%)',
   borderRadius: '8px',
   padding: '24px 8px',
   boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23)', // Elevation #3
@@ -36,7 +36,7 @@ export const headerStyles: CSSProperties = {
   fontWeight: 600,
   fontSize: '28px',
   fontStyle: 'normal',
-  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
+  textShadow: '2px 2px 4px rgba(255, 255, 255, 0.2)',
   color: '#363636',
 }
 
@@ -64,17 +64,18 @@ export const winnerTokenWreathIconSize = 64
 export const winnerToken = {
   root: {},
   logoWrapper: {
-    outline: `2px solid rgba(0, 0, 0, 0.15)`,
+    outline: `2px solid rgba(255, 255, 255, 0.7)`,
   },
   wreathIcon: {
-    color: 'rgba(0, 0, 0, 0.3)',
-    transform: `rotate(-20deg) translateX(-25%) translateY(45%)`,
+    color: 'rgba(255, 255, 255, 0.9)',
+    filter: 'drop-shadow(0px 0px 10px #fff)',
+    transform: `rotate(-20deg) translateX(-30%) translateY(45%)`,
   },
   wreathIconMirror: {
-    transform: `rotate(20deg) translateX(25%) translateY(45%) scaleX(-1)`,
+    transform: `rotate(20deg) translateX(30%) translateY(45%) scaleX(-1)`,
   },
   labelWrapper: {
-    marginTop: '30px',
+    marginTop: '40px',
   },
   labelSymbol: {
     color: dimColor,
@@ -101,8 +102,8 @@ export const tokenList = {
   root: {
     marginTop: 25,
     marginBottom: 35,
-    marginLeft: 24,
-    marginRight: 24,
+    marginLeft: 40,
+    marginRight: 40,
   },
   item: {
     padding: `0 4px`,
@@ -110,7 +111,7 @@ export const tokenList = {
     gap: 6,
   },
   itemPriceChangeBar: {
-    background: `linear-gradient(240deg, var(--color) 0%, rgba(255,255,255,1) 100%)`,
+    background: `linear-gradient(240deg, var(--color) 0%, rgba(255,255,255,0) 100%)`,
     borderRadius: 4,
     gap: 4,
     paddingRight: 4,
@@ -121,7 +122,7 @@ export const tokenList = {
     gap: 4
   },
   itemInfoPrice: {
-    fontWeight: 500,
-    color: 'rgba(0, 0, 0, 0.6)'
+    fontWeight: 'bold',
+    color: 'hsl(0, 0%, 100%)',
   }
 } satisfies Record<string, CSSProperties & Partial<{ '--color': string }>>

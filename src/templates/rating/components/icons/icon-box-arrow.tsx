@@ -14,7 +14,10 @@ function IconBoxArrow({ size, width = '0.75em', height = '0.75em', direction = '
       fill="currentColor"
       width={size ?? width}
       height={size ?? height}
-      style={{ transform: `rotateZ(${getRotationZ(direction)}deg)` }}
+      style={{ 
+        transform: `rotateZ(${getRotationZ(direction)}deg)`,
+        filter: 'drop-shadow(0px 0px 5px currentColor)'
+       }}
       {...restProps}
     >
       <path d="M11.178 19.569a.998.998 0 001.644 0l9-13A.999.999 0 0021 5H3a1.002 1.002 0 00-.822 1.569l9 13z" />

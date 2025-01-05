@@ -61,7 +61,10 @@ function Icon({ token }: Props) {
 function Label({ token }: Props) {
   return (
     <div style={winnerToken.labelWrapper}>
-      <span>{token.name}</span>
+      <span style={{
+        color: 'hsl(0, 0%, 100%)',
+        fontWeight: 'bold'
+      }}>{token.name}</span>
       &nbsp;
       <span style={winnerToken.labelSymbol}>{token.symbol}</span>
     </div>
@@ -75,6 +78,7 @@ function PriceInfo({ token }: Props) {
         style={{
           ...winnerToken.priceChange,
           color: token.priceChange >= 0 ? positiveChangeColor : negativeChangeColor,
+          textShadow: `0 0 10px ${token.priceChange >= 0 ? positiveChangeColor : negativeChangeColor}`,
         }}
       >
         <IconBoxArrow direction={token.priceChange >= 0 ? 'top' : 'bottom'} />
