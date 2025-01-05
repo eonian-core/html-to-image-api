@@ -12,7 +12,7 @@ interface Props {
   tokens: Token[]
 }
 
-export function TokenRating({ type, category, tokens }: Props) {
+export default function Rating({ type, category, tokens }: Props) {
   tokens = tokens.sort((a, b) => b.priceChange - a.priceChange).slice(0, 5)
   return (
     <GradientWrapper type={type}>
