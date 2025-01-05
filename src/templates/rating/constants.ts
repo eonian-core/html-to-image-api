@@ -17,13 +17,13 @@ export const gradientWrapperColors: [string, string][] = [
   ['#f37055', '#a166ab'],
   ['#d52a60', '#637cee'],
 ]
-export const gradientWrapperPadding = '8px'
+export const gradientWrapperPadding = '16px'
 
 /**
  * <Card />
  */
 export const cardStyles: CSSProperties = {
-  backgroundColor: '#fff',
+  background: 'linear-gradient(to bottom right, hsl(240, 6%, 90%) 15%, hsl(0, 0%, 100%) 40%, hsl(240, 6%, 90%) 55%)',
   borderRadius: '8px',
   padding: '24px 8px',
   boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23)', // Elevation #3
@@ -59,7 +59,7 @@ export const categoryCaptionFontStyles = {
 /**
  * <WinnerToken />
  */
-export const winnerTokenLogoSize = 56
+export const winnerTokenLogoSize = 84
 export const winnerTokenWreathIconSize = 64
 export const winnerToken = {
   root: {},
@@ -68,19 +68,19 @@ export const winnerToken = {
   },
   wreathIcon: {
     color: 'rgba(0, 0, 0, 0.3)',
-    transform: `rotate(-20deg) translateX(0%) translateY(20%)`,
+    transform: `rotate(-20deg) translateX(-25%) translateY(45%)`,
   },
   wreathIconMirror: {
-    transform: `rotate(20deg) translateX(0%) translateY(20%) scaleX(-1)`,
+    transform: `rotate(20deg) translateX(25%) translateY(45%) scaleX(-1)`,
   },
   labelWrapper: {
-    marginTop: '12px',
+    marginTop: '30px',
   },
   labelSymbol: {
     color: dimColor,
   },
   priceWrapper: {
-    marginTop: 10,
+    marginTop: 7,
   },
   priceChange: {
     fontWeight: 600,
@@ -99,7 +99,10 @@ export const winnerToken = {
 export const tokenListIconSize = 20
 export const tokenList = {
   root: {
-    marginTop: 20,
+    marginTop: 25,
+    marginBottom: 35,
+    marginLeft: 24,
+    marginRight: 24,
   },
   item: {
     padding: `0 4px`,

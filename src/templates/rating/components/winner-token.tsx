@@ -36,8 +36,8 @@ function Icon({ token }: Props) {
           margin: 'auto',
           borderRadius: '50%',
           overflow: 'hidden',
-          width: '56px',
-          height: '56px',
+          width: '84px',
+          height: '84px',
           boxSizing: 'content-box',
           ...winnerToken.logoWrapper,
         }}

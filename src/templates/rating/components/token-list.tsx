@@ -11,7 +11,7 @@ export function TokenList({ tokens }: Props) {
   const [minPriceChange, maxPriceChange] = getMinMaxPriceChange(tokens)
   return (
     <div
-      style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', ...tokenList.root }}
+      style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-around', ...tokenList.root }}
     >
       {tokens.map((token, index) => (
         <TokenInfo
