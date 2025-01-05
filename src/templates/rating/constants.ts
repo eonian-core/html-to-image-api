@@ -117,6 +117,7 @@ export const tokenList = {
     paddingRight: 4,
     color: '#fff',
     fontWeight: 500,
+    filter: 'drop-shadow(0px 0px 3px var(--color))'
   },
   itemInfo: {
     gap: 4
