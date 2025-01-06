@@ -6,6 +6,10 @@
 app = "html-to-image-api"
 primary_region = "waw"
 
+[[vm]]
+  size = "shared-cpu-2x"
+  memory = "2gb"
+
 [build]
 
 [http_service]

@@ -1,5 +1,5 @@
 # Use the Playwright base image
-FROM mcr.microsoft.com/playwright:v1.41.0-jammy as base
+FROM mcr.microsoft.com/playwright:v1.49.0-jammy as base
 
 LABEL app_name="html-to-image-api"
 LABEL fly_launch_runtime="Node.js"
@@ -20,10 +20,6 @@ RUN apt-get update && \
     apt-get install -y nodejs && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-# Install packages needed to build node modules
-# RUN apt-get update -qq && \
-#     apt-get install -y --fix-broken node-mkdirp node-nopt node-tar node-which build-essential node-gyp pkg-config python-is-python3
 
 # Verify Node.js installation
 RUN node -v && npm -v
